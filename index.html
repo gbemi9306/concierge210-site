@@ -167,6 +167,32 @@
   .callback-btn.brick { background: var(--brick); }
   .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
+  .pay-block {
+    margin: 28px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .pay-block h4 {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 17px;
+    margin: 0 0 14px;
+  }
+  .pay-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .pay-row:last-child { border-bottom: none; }
+  .pay-row .label { font-weight: 600; }
+  .pay-row a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .pay-row a:hover { border-bottom-color: var(--navy); }
+  .pay-row .value { color: var(--ink-soft); }
+
   footer {
     padding: 32px 24px calc(32px + env(safe-area-inset-bottom, 0px));
     text-align: left;
@@ -354,7 +380,7 @@
       </div>
       <div class="faq-item">
         <h4>How do I pay?</h4>
-        <p>Venmo, Zelle, or Cash App. Check-in service is billed monthly up front; move-in packages are a flat fee paid before I start.</p>
+        <p>Zelle or PayPal, sent directly — no middleman. Check-in service is billed monthly up front; move-in packages are a flat fee paid before I start.</p>
       </div>
       <div class="faq-item">
         <h4>Can I cancel anytime?</h4>
@@ -377,6 +403,18 @@
       <div class="btn-row">
         <a class="callback-btn" href="mailto:gbemisolarin79@gmail.com?subject=Check-in%20%26%20coordination%20-%20free%20call&body=Hi%20Toyin%2C%0A%0AI'd%20like%20to%20set%20up%20a%20free%2015-minute%20call%20about%20check-in%20%26%20coordination%20service.%0A%0AMy%20name%3A%0ABest%20number%20to%20reach%20me%3A%0ABest%20time%20to%20call%3A%0AA%20bit%20about%20the%20situation%3A">Request a callback — check-in</a>
         <a class="callback-btn brick" href="mailto:gbemisolarin79@gmail.com?subject=Move-in%20concierge%20-%20free%20call&body=Hi%20Toyin%2C%0A%0AI'd%20like%20to%20set%20up%20a%20free%2015-minute%20call%20about%20the%20move-in%20concierge%20service.%0A%0AMy%20name%3A%0ABest%20number%20to%20reach%20me%3A%0AMove%2FPCS%20date%3A%0AA%20bit%20about%20what%20I%20need%3A">Request a callback — move-in</a>
+      </div>
+
+      <div class="pay-block">
+        <h4>Ways to pay</h4>
+        <div class="pay-row">
+          <span class="label">PayPal</span>
+          <a href="https://paypal.me/OLUWATOYINSOLARIN" target="_blank" rel="noopener">paypal.me/OLUWATOYINSOLARIN</a>
+        </div>
+        <div class="pay-row">
+          <span class="label">Zelle</span>
+          <span class="value">(720) 557-5541</span>
+        </div>
       </div>
     </div>
   </section>
