@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Concierge210 — San Antonio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EEEAE0;
+    --paper-raised: #E4DFD1;
+    --ink: #211E1B;
+    --ink-soft: #514C43;
+    --navy: #23344D;
+    --brick: #9A4530;
+    --gold: #B8863E;
+    --line: #CFC7B4;
+    --font-head: "Fraunces", serif;
+    --font-body: "Public Sans", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1815;
+      --paper-raised: #24201B;
+      --ink: #EDE7DA;
+      --ink-soft: #B8AFA0;
+      --navy: #7C93B5;
+      --brick: #D2795F;
+      --gold: #D6AD68;
+      --line: #3A342C;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #1B1815;
+    --paper-raised: #24201B;
+    --ink: #EDE7DA;
+    --ink-soft: #B8AFA0;
+    --navy: #7C93B5;
+    --brick: #D2795F;
+    --gold: #D6AD68;
+    --line: #3A342C;
+  }
+
+  * { box-sizing: border-box; }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    font-size: 17px;
+  }
+  a { color: inherit; }
+
+  /* Nav */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 24px;
+    padding-top: calc(16px + env(safe-area-inset-top, 0px));
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .brand {
+    font-family: var(--font-head);
+    font-size: 19px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  nav .links {
+    display: flex;
+    gap: 18px;
+    font-size: 14.5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav .links::-webkit-scrollbar { display: none; }
+  nav .links a { text-decoration: none; color: var(--ink-soft); white-space: nowrap; }
+  nav .links a:hover { color: var(--ink); }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--line); }
+
+  .kicker { font-size: 14px; color: var(--ink-soft); margin: 0 0 10px; }
+  h1 {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: clamp(32px, 7vw, 44px);
+    line-height: 1.12;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  h2.section-title {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: clamp(24px, 5vw, 30px);
+    margin: 0 0 28px;
+  }
+  .lede { font-size: 19px; color: var(--ink-soft); max-width: 46ch; margin: 0 0 8px; }
+  .trust { margin: 18px 0 0; font-size: 15px; color: var(--ink-soft); }
+  .trust.rule { padding-top: 20px; border-top: 1px solid var(--line); margin-top: 28px; }
+
+  .offer { padding-left: 22px; border-left: 3px solid var(--rail, var(--navy)); margin-bottom: 44px; }
+  .offer:last-child { margin-bottom: 0; }
+  .offer.brick { --rail: var(--brick); }
+  .offer h3 { font-family: var(--font-head); font-weight: 500; font-size: 24px; margin: 0 0 6px; }
+  .offer .tagline { color: var(--ink-soft); margin: 0 0 18px; font-size: 16px; }
+  .offer p.for { font-size: 15px; color: var(--ink-soft); margin: 0 0 18px; }
+  .offer p.for strong { color: var(--ink); font-weight: 600; }
+
+  .tiers { display: flex; flex-direction: column; margin: 0 0 18px; }
+  .tier { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .tier:last-child { border-bottom: none; }
+  .tier .name { font-weight: 600; font-size: 15.5px; }
+  .tier .desc { color: var(--ink-soft); font-size: 14.5px; margin-top: 3px; }
+  .tier .price { font-family: var(--font-head); font-size: 20px; white-space: nowrap; padding-left: 12px; }
+  .cta-line { font-size: 15px; color: var(--ink-soft); }
+
+  /* How it works */
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+  .step { display: flex; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--line); counter-increment: step; }
+  .step:last-child { border-bottom: none; }
+  .step .num {
+    font-family: var(--font-head);
+    font-size: 20px;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 28px;
+  }
+  .step .num::before { content: counter(step); }
+  .step h4 { margin: 0 0 4px; font-size: 16.5px; font-weight: 600; }
+  .step p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+  /* FAQ */
+  .faq-item { padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item h4 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+  .faq-item p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+  /* Contact */
+  .contact { display: flex; flex-direction: column; gap: 10px; font-size: 16px; margin-bottom: 24px; }
+  .contact a { text-decoration: none; border-bottom: 1px solid var(--line); display: inline-block; }
+  .contact a:hover { border-bottom-color: var(--navy); }
+  .callback-btn {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--paper);
+    padding: 14px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15.5px;
+  }
+  .callback-btn.brick { background: var(--brick); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  footer {
+    padding: 32px 24px calc(32px + env(safe-area-inset-bottom, 0px));
+    text-align: left;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Help / instructions */
+  .help-fab {
+    position: fixed;
+    right: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--navy);
+    color: var(--paper);
+    font-family: var(--font-head);
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+  }
+  .help-fab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .help-panel {
+    position: fixed;
+    right: 20px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    width: min(320px, calc(100vw - 40px));
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    padding: 20px 22px;
+    z-index: 20;
+  }
+  .help-panel[hidden] { display: none; }
+  .help-panel h4 {
+    font-family: var(--font-head);
+    font-weight: 500;
+    font-size: 17px;
+    margin: 0 0 12px;
+  }
+  .help-panel ol { margin: 0 0 14px; padding-left: 20px; font-size: 14.5px; color: var(--ink-soft); }
+  .help-panel li { margin-bottom: 8px; }
+  .help-panel .close-help {
+    background: none;
+    border: none;
+    color: var(--navy);
+    font-size: 14px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    border-bottom: 1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <span class="brand">Concierge210</span>
+    <div class="links">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section id="top">
+    <div class="wrap">
+      <p class="kicker">San Antonio, TX</p>
+      <h1>Someone local, on it, so you don't have to be.</h1>
+      <p class="lede">I handle the calls, the paperwork, and the follow-through for families who either have someone aging here — or are landing here — and don't have the time or the local know-how to do it themselves.</p>
+      <p class="trust">No contracts. Pay as you go.</p>
+      <p class="trust rule">I'm Toyin Solarin, founder of Concierge210. For seven years I've kept a high-volume Amazon sortation operation accurate and on schedule, and before that I led a 50-person team processing thousands of bank accounts a year in a regulated environment. If you're trusting someone with a parent's wellbeing or your family's move, that's the kind of steady, detail-first person you're getting.</p>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <h2 class="section-title">Services</h2>
+
+      <div class="offer">
+        <h3>Family check-in &amp; coordination</h3>
+        <p class="tagline">Regular, reliable eyes on a parent living in San Antonio.</p>
+        <p class="for">For: <strong>adult children</strong> — especially living out of state or stationed elsewhere — who worry about a parent here and can't check in as often as they'd like.</p>
+        <div class="tiers">
+          <div class="tier">
+            <div><div class="name">Basic</div><div class="desc">Two check-in calls a week, one written update every Friday</div></div>
+            <div class="price">$150/mo</div>
+          </div>
+          <div class="tier">
+            <div><div class="name">Standard</div><div class="desc">Basic, plus up to two medical appointments a month and mail screened for scams</div></div>
+            <div class="price">$250/mo</div>
+          </div>
+          <div class="tier">
+            <div><div class="name">Premium</div><div class="desc">Standard, plus same-week response if something feels off, and coordination with existing caregivers</div></div>
+            <div class="price">$400/mo</div>
+          </div>
+        </div>
+        <p class="cta-line">Not medical care — just a steady, trustworthy person on the ground.</p>
+      </div>
+
+      <div class="offer brick">
+        <h3>Move-in concierge</h3>
+        <p class="tagline">The errand list handled before you've even unpacked.</p>
+        <p class="for">For: <strong>families relocating to San Antonio</strong> — PCS orders to JBSA, or moving in from out of state — who need school enrollment, utilities, and providers sorted fast.</p>
+        <div class="tiers">
+          <div class="tier">
+            <div><div class="name">Basic</div><div class="desc">School enrollment paperwork prepared and submitted, utilities set up</div></div>
+            <div class="price">$150</div>
+          </div>
+          <div class="tier">
+            <div><div class="name">Standard</div><div class="desc">Basic, plus a pediatrician, dentist, and vet booked nearby, and DMV registration walked through</div></div>
+            <div class="price">$275</div>
+          </div>
+          <div class="tier">
+            <div><div class="name">Full landing</div><div class="desc">Standard, plus unpacking-day help lined up and a first-two-weeks cheat sheet for the neighborhood</div></div>
+            <div class="price">$400</div>
+          </div>
+        </div>
+        <p class="cta-line">One flat fee, done within your first two weeks in San Antonio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <h2 class="section-title">How it works</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="num"></span>
+          <div><h4>Reach out</h4><p>Call, text, or email. Tell me what's going on — a parent you're worried about, or a move you're trying to get ahead of.</p></div>
+        </li>
+        <li class="step">
+          <span class="num"></span>
+          <div><h4>Free 15-minute call</h4><p>We talk through the situation and figure out which package actually fits. No pressure, no sales pitch.</p></div>
+        </li>
+        <li class="step">
+          <span class="num"></span>
+          <div><h4>A simple agreement</h4><p>I text or email a one-page summary of exactly what's included and the rate. You confirm — that's the whole contract.</p></div>
+        </li>
+        <li class="step">
+          <span class="num"></span>
+          <div><h4>We start</h4><p>Check-in service usually begins within 48 hours. Move-in packages start on your timeline — even before you land, if needed.</p></div>
+        </li>
+        <li class="step">
+          <span class="num"></span>
+          <div><h4>You stay in the loop</h4><p>Weekly written updates for check-in service, or a final handoff report when a move-in package wraps. I'm always reachable by phone or text in between.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="section-title">Questions families ask</h2>
+
+      <div class="faq-item">
+        <h4>Is this medical care?</h4>
+        <p>No. I'm not a nurse or a medical provider. I coordinate, check in, and handle logistics — for anything medical, I work alongside your parent's existing doctors and caregivers, not in place of them.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What areas do you serve?</h4>
+        <p>The San Antonio metro area, including JBSA-Lackland, JBSA-Fort Sam Houston, and JBSA-Randolph.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How do I pay?</h4>
+        <p>Venmo, Zelle, or Cash App. Check-in service is billed monthly up front; move-in packages are a flat fee paid before I start.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can I cancel anytime?</h4>
+        <p>Yes. No contracts, no cancellation fee — just let me know before the next billing date.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if something urgent comes up?</h4>
+        <p>Premium check-in clients get a same-week response from me for anything that feels off. For a true emergency, call 911 first — I'll coordinate with family after.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-title">Get in touch</h2>
+      <div class="contact">
+        <a href="tel:+17205575541">(720) 557-5541 — call or text</a>
+        <a href="mailto:gbemisolarin79@gmail.com">gbemisolarin79@gmail.com</a>
+      </div>
+      <div class="btn-row">
+        <a class="callback-btn" href="mailto:gbemisolarin79@gmail.com?subject=Check-in%20%26%20coordination%20-%20free%20call&body=Hi%20Toyin%2C%0A%0AI'd%20like%20to%20set%20up%20a%20free%2015-minute%20call%20about%20check-in%20%26%20coordination%20service.%0A%0AMy%20name%3A%0ABest%20number%20to%20reach%20me%3A%0ABest%20time%20to%20call%3A%0AA%20bit%20about%20the%20situation%3A">Request a callback — check-in</a>
+        <a class="callback-btn brick" href="mailto:gbemisolarin79@gmail.com?subject=Move-in%20concierge%20-%20free%20call&body=Hi%20Toyin%2C%0A%0AI'd%20like%20to%20set%20up%20a%20free%2015-minute%20call%20about%20the%20move-in%20concierge%20service.%0A%0AMy%20name%3A%0ABest%20number%20to%20reach%20me%3A%0AMove%2FPCS%20date%3A%0AA%20bit%20about%20what%20I%20need%3A">Request a callback — move-in</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Concierge210 · San Antonio, TX
+  </footer>
+
+  <button class="help-fab" id="helpToggle" aria-label="How to use this site" aria-expanded="false" aria-controls="helpPanel">?</button>
+  <div class="help-panel" id="helpPanel" role="dialog" aria-label="How to use this site" hidden>
+    <h4>New here? Three quick steps</h4>
+    <ol>
+      <li>Scroll to <strong>Services</strong> and see which one fits — check-in help or a move-in.</li>
+      <li>Check <strong>How it works</strong> below that for what actually happens.</li>
+      <li>Tap <strong>Request a callback</strong> under Contact — it opens an email ready to send, no forms to fill out.</li>
+    </ol>
+    <button class="close-help" id="helpClose">Close</button>
+  </div>
+
+  <script>
+    (function () {
+      var fab = document.getElementById('helpToggle');
+      var panel = document.getElementById('helpPanel');
+      var closeBtn = document.getElementById('helpClose');
+
+      function openPanel() {
+        panel.hidden = false;
+        fab.setAttribute('aria-expanded', 'true');
+      }
+      function closePanel() {
+        panel.hidden = true;
+        fab.setAttribute('aria-expanded', 'false');
+        fab.focus();
+      }
+      fab.addEventListener('click', function () {
+        panel.hidden ? openPanel() : closePanel();
+      });
+      closeBtn.addEventListener('click', closePanel);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !panel.hidden) closePanel();
+      });
+      document.addEventListener('click', function (e) {
+        if (!panel.hidden && !panel.contains(e.target) && e.target !== fab) {
+          closePanel();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
