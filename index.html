@@ -167,6 +167,86 @@
   .callback-btn.brick { background: var(--brick); }
   .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
+  /* Intake form */
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 13px; color: var(--ink-soft); margin: 2px 0 6px; }
+  .field input[type="text"],
+  .field input[type="tel"],
+  .field input[type="email"],
+  .field input[type="date"],
+  .field textarea,
+  .field select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 16px;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 2px;
+  }
+  .field textarea { min-height: 90px; resize: vertical; }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: 2px solid var(--navy);
+    outline-offset: 1px;
+  }
+
+  .service-toggle { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
+  .service-toggle label {
+    flex: 1;
+    min-width: 140px;
+    border: 1px solid var(--line);
+    padding: 14px 16px;
+    cursor: pointer;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .service-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .service-toggle input:checked + span { color: var(--paper); }
+  .service-toggle label:has(input:checked) { background: var(--navy); border-color: var(--navy); color: var(--paper); }
+
+  .conditional { display: none; }
+  .conditional.active { display: block; }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--navy);
+    color: var(--paper);
+    border: none;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font-body);
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .submit-btn:disabled { opacity: 0.6; cursor: default; }
+
+  .hp-field { position: absolute; left: -9999px; }
+
+  .form-note { font-size: 13.5px; color: var(--ink-soft); margin-top: 14px; }
+
+  .thanks {
+    display: none;
+    padding: 32px 24px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    text-align: left;
+  }
+  .thanks.active { display: block; }
+  .thanks h3 { font-family: var(--font-head); font-weight: 500; font-size: 22px; margin: 0 0 10px; }
+  .thanks p { margin: 0; color: var(--ink-soft); }
+
+  .error-note {
+    display: none;
+    color: var(--brick);
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  .error-note.active { display: block; }
+
   .pay-block {
     margin: 28px 0 0;
     padding-top: 24px;
@@ -276,6 +356,7 @@
       <a href="#services">Services</a>
       <a href="#how">How it works</a>
       <a href="#faq">FAQ</a>
+      <a href="#intake">Get started</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -393,6 +474,98 @@
     </div>
   </section>
 
+  <section id="intake">
+    <div class="wrap">
+      <h2 class="section-title">Get started</h2>
+      <p class="lede" style="font-size:16px; margin-bottom:32px;">Tell me a bit about your situation and I'll reach out within 24 hours to set up a free 15-minute call.</p>
+
+      <form id="intakeForm" name="intake" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="intake" />
+        <p class="hp-field"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+
+        <div class="service-toggle">
+          <label><input type="radio" name="service" value="Check-in & coordination" checked onchange="toggleService()"><span>Check-in &amp; coordination</span></label>
+          <label><input type="radio" name="service" value="Move-in concierge" onchange="toggleService()"><span>Move-in concierge</span></label>
+        </div>
+
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="phone">Best phone number</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="contactPref">Preferred contact method</label>
+          <select id="contactPref" name="preferred_contact">
+            <option>Call</option>
+            <option>Text</option>
+            <option>Email</option>
+          </select>
+        </div>
+
+        <div id="checkinFields" class="conditional active">
+          <div class="field">
+            <label for="relationship">Your relationship to the parent</label>
+            <input type="text" id="relationship" name="relationship_to_parent" placeholder="e.g. daughter, son">
+          </div>
+          <div class="field">
+            <label for="parentArea">Parent's neighborhood or area in San Antonio</label>
+            <input type="text" id="parentArea" name="parent_area">
+          </div>
+          <div class="field">
+            <label for="checkinTier">Which tier are you interested in?</label>
+            <select id="checkinTier" name="checkin_tier">
+              <option>Not sure yet</option>
+              <option>Basic — $150/mo</option>
+              <option>Standard — $250/mo</option>
+              <option>Premium — $400/mo</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="moveinFields" class="conditional">
+          <div class="field">
+            <label for="moveDate">Move or PCS date</label>
+            <input type="date" id="moveDate" name="move_date">
+          </div>
+          <div class="field">
+            <label for="familySize">Family size &amp; ages of any kids needing school enrollment</label>
+            <input type="text" id="familySize" name="family_size" placeholder="e.g. 2 adults, kids ages 7 and 10">
+          </div>
+          <div class="field">
+            <label for="moveinTier">Which package are you interested in?</label>
+            <select id="moveinTier" name="movein_tier">
+              <option>Not sure yet</option>
+              <option>Basic — $150</option>
+              <option>Standard — $275</option>
+              <option>Full landing — $400</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="details">Tell me a bit about your situation</label>
+          <textarea id="details" name="details" placeholder="Whatever's most helpful for me to know before we talk"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send my info</button>
+        <p class="form-note">No payment, no commitment — this just starts the conversation.</p>
+        <p class="error-note" id="errorNote">Something went wrong sending this. Please email <a href="mailto:gbemisolarin79@gmail.com" style="color:var(--brick);">gbemisolarin79@gmail.com</a> directly instead.</p>
+      </form>
+
+      <div class="thanks" id="thanksBox">
+        <h3>Got it, thank you.</h3>
+        <p>I'll reach out within 24 hours at the contact method you prefer. If it's urgent, call or text me directly at (720) 557-5541.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="wrap">
       <h2 class="section-title">Get in touch</h2>
@@ -437,6 +610,42 @@
   </div>
 
   <script>
+    function toggleService() {
+      var isCheckin = document.querySelector('input[name="service"]:checked').value === 'Check-in & coordination';
+      document.getElementById('checkinFields').classList.toggle('active', isCheckin);
+      document.getElementById('moveinFields').classList.toggle('active', !isCheckin);
+    }
+
+    (function () {
+      var form = document.getElementById('intakeForm');
+      var thanks = document.getElementById('thanksBox');
+      var errorNote = document.getElementById('errorNote');
+      var submitBtn = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorNote.classList.remove('active');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        var data = new FormData(form);
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        })
+          .then(function () {
+            form.style.display = 'none';
+            thanks.classList.add('active');
+          })
+          .catch(function () {
+            errorNote.classList.add('active');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send my info';
+          });
+      });
+    })();
+
     (function () {
       var fab = document.getElementById('helpToggle');
       var panel = document.getElementById('helpPanel');
