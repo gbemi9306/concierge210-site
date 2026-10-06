@@ -180,17 +180,34 @@
     position: fixed;
     right: 20px;
     bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: var(--navy);
-    color: var(--paper);
-    font-family: var(--font-head);
-    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 52px;
+    padding: 0 20px 0 16px;
+    border-radius: 26px;
+    border: none;
+    background: var(--brick);
+    color: #FFFFFF;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
     z-index: 20;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+  }
+  .help-fab .q-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: var(--brick);
+    font-family: var(--font-head);
+    font-size: 15px;
+    flex-shrink: 0;
   }
   .help-fab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
@@ -368,7 +385,9 @@
     Concierge210 · San Antonio, TX
   </footer>
 
-  <button class="help-fab" id="helpToggle" aria-label="How to use this site" aria-expanded="false" aria-controls="helpPanel">?</button>
+  <button class="help-fab" id="helpToggle" aria-label="How to use this site" aria-expanded="false" aria-controls="helpPanel">
+    <span class="q-mark">?</span><span>Help</span>
+  </button>
   <div class="help-panel" id="helpPanel" role="dialog" aria-label="How to use this site" hidden>
     <h4>New here? Three quick steps</h4>
     <ol>
