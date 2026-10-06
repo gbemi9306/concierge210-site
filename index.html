@@ -421,7 +421,7 @@
         if (e.key === 'Escape' && !panel.hidden) closePanel();
       });
       document.addEventListener('click', function (e) {
-        if (!panel.hidden && !panel.contains(e.target) && e.target !== fab) {
+        if (!panel.hidden && !panel.contains(e.target) && !fab.contains(e.target)) {
           closePanel();
         }
       });
