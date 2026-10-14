@@ -1,0 +1,9 @@
+{
+  "name": "concierge210-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Concierge210 website + lead automation functions",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}
