@@ -498,11 +498,11 @@
         </div>
         <div class="field">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email">
         </div>
         <div class="field">
           <label for="contactPref">Preferred contact method</label>
-          <select id="contactPref" name="preferred_contact">
+          <select id="contactPref" name="preferred_contact" required>
             <option>Call</option>
             <option>Text</option>
             <option>Email</option>
@@ -515,8 +515,15 @@
             <input type="text" id="relationship" name="relationship_to_parent" placeholder="e.g. daughter, son">
           </div>
           <div class="field">
-            <label for="parentArea">Parent's neighborhood or area in San Antonio</label>
-            <input type="text" id="parentArea" name="parent_area">
+            <label for="parentAddress">Parent's address</label>
+            <input type="text" id="parentAddress" name="parent_address">
+          </div>
+          <div class="field">
+            <label for="hasPets">Do you have pets?</label>
+            <select id="hasPets" name="has_pets">
+              <option>No</option>
+              <option>Yes</option>
+            </select>
           </div>
           <div class="field">
             <label for="checkinTier">Which tier are you interested in?</label>
